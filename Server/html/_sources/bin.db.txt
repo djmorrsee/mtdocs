@@ -1,0 +1,20 @@
+bin.db package
+==============
+
+Submodules
+----------
+
+.. toctree::
+
+   bin.db.db_actions
+   bin.db.db_schema
+   bin.db.test_db_actions
+   bin.db.test_db_schema
+
+Module contents
+---------------
+
+.. automodule:: bin.db
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bin.data.data module &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="up" title="bin.data package" href="bin.data.html" />
+    <link rel="next" title="bin.data.test_conversions module" href="bin.data.test_conversions.html" />
+    <link rel="prev" title="bin.data.conversions module" href="bin.data.conversions.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.data.test_conversions.html" title="bin.data.test_conversions module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bin.data.conversions.html" title="bin.data.conversions module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.data.html" accesskey="U">bin.data package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-bin.data.data">
+<span id="bin-data-data-module"></span><h1>bin.data.data module<a class="headerlink" href="#module-bin.data.data" title="Permalink to this headline">¶</a></h1>
+<p>Reading Data</p>
+<p>This file contains methods to ensure data format conformation</p>
+<dl class="function">
+<dt id="bin.data.data.ReadingsToHistoryJSON">
+<tt class="descclassname">bin.data.data.</tt><tt class="descname">ReadingsToHistoryJSON</tt><big>(</big><em>m_id</em>, <em>readings</em><big>)</big><a class="reference internal" href="_modules/bin/data/data.html#ReadingsToHistoryJSON"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.data.ReadingsToHistoryJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper method to build properly formated JSON</p>
+<p>Conforms to module_history_reading.json</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m_id</strong> (<em>int</em>) &#8211; The module ID for these readings</td>
+</tr>
+</tbody>
+</table>
+<p>:param readings:A list of ModuleReadings
+:type readings: list [ ]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">JSON Dictionary &#8211; Formatted for browser consumption</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bin.data.conversions.html"
+                        title="previous chapter">bin.data.conversions module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bin.data.test_conversions.html"
+                        title="next chapter">bin.data.test_conversions module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/bin.data.data.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.data.test_conversions.html" title="bin.data.test_conversions module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bin.data.conversions.html" title="bin.data.conversions module"
+             >previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.data.html" >bin.data package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

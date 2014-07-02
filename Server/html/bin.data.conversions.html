@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bin.data.conversions module &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="up" title="bin.data package" href="bin.data.html" />
+    <link rel="next" title="bin.data.data module" href="bin.data.data.html" />
+    <link rel="prev" title="bin.data package" href="bin.data.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.data.data.html" title="bin.data.data module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bin.data.html" title="bin.data package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.data.html" accesskey="U">bin.data package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-bin.data.conversions">
+<span id="bin-data-conversions-module"></span><h1>bin.data.conversions module<a class="headerlink" href="#module-bin.data.conversions" title="Permalink to this headline">¶</a></h1>
+<p>Data Conversions</p>
+<p>This file contains functions for converting module data into meaningful information</p>
+<dl class="function">
+<dt id="bin.data.conversions.CheckReadingBounds">
+<tt class="descclassname">bin.data.conversions.</tt><tt class="descname">CheckReadingBounds</tt><big>(</big><em>reading</em><big>)</big><a class="reference internal" href="_modules/bin/data/conversions.html#CheckReadingBounds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.conversions.CheckReadingBounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asserts That the reading is 12 bits</p>
+<p>Do this after calling CheckReadingType on readings</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reading</strong> (<em>12 bit int</em>) &#8211; pcDuino Sensor Reading</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bool &#8211; Assertion of 12 bit resolution</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.data.conversions.CheckReadingType">
+<tt class="descclassname">bin.data.conversions.</tt><tt class="descname">CheckReadingType</tt><big>(</big><em>reading</em><big>)</big><a class="reference internal" href="_modules/bin/data/conversions.html#CheckReadingType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.conversions.CheckReadingType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asserts that the reading is of type int</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reading</strong> (<em>12 bit int</em>) &#8211; pcDuino Sensor Reading</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bool &#8211; Assertion of int type</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="bin.data.conversions.ConversionError">
+<em class="property">exception </em><tt class="descclassname">bin.data.conversions.</tt><tt class="descname">ConversionError</tt><big>(</big><em>msg</em><big>)</big><a class="reference internal" href="_modules/bin/data/conversions.html#ConversionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.conversions.ConversionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Exception Class for Data Conversion Errors</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.data.conversions.GetLocalTimeString">
+<tt class="descclassname">bin.data.conversions.</tt><tt class="descname">GetLocalTimeString</tt><big>(</big><em>utc_stamp</em><big>)</big><a class="reference internal" href="_modules/bin/data/conversions.html#GetLocalTimeString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.conversions.GetLocalTimeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper Method To Get a datetime object from utc stamp</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>utc_stamp</strong> (<em>float</em>) &#8211; UTC/POSIX Time Stamp</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.data.conversions.IntToLight">
+<tt class="descclassname">bin.data.conversions.</tt><tt class="descname">IntToLight</tt><big>(</big><em>reading</em><big>)</big><a class="reference internal" href="_modules/bin/data/conversions.html#IntToLight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.conversions.IntToLight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a pcDuino reading into a percentage</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reading</strong> (<em>12 bit int</em>) &#8211; pcDuino Light Sensor Reading</td>
+</tr>
+</tbody>
+</table>
+<p><strong>reading</strong> type and resolution are checked in function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">float &#8211; The light intensity percentage</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.data.conversions.IntToTemp">
+<tt class="descclassname">bin.data.conversions.</tt><tt class="descname">IntToTemp</tt><big>(</big><em>reading</em><big>)</big><a class="reference internal" href="_modules/bin/data/conversions.html#IntToTemp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.conversions.IntToTemp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a pcDuino reading into degrees farenheight</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reading</strong> (<em>12 bit int</em>) &#8211; pcDuino Temperature Sensor Reading</td>
+</tr>
+</tbody>
+</table>
+<p><strong>reading</strong> type and resolution are checked in function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">float &#8211; The temperature value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.data.conversions.MakeTimeStamp">
+<tt class="descclassname">bin.data.conversions.</tt><tt class="descname">MakeTimeStamp</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/bin/data/conversions.html#MakeTimeStamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.data.conversions.MakeTimeStamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper Method to Create a UTC Timestamp</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">UTC/POSIX Time Stamp &#8211; Assumes time zones don&#8217;t change.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bin.data.html"
+                        title="previous chapter">bin.data package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bin.data.data.html"
+                        title="next chapter">bin.data.data module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/bin.data.conversions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.data.data.html" title="bin.data.data module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bin.data.html" title="bin.data package"
+             >previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.data.html" >bin.data package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

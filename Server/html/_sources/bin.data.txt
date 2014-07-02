@@ -1,0 +1,19 @@
+bin.data package
+================
+
+Submodules
+----------
+
+.. toctree::
+
+   bin.data.conversions
+   bin.data.data
+   bin.data.test_conversions
+
+Module contents
+---------------
+
+.. automodule:: bin.data
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,7 @@
+bin.util.authorization module
+=============================
+
+.. automodule:: bin.util.authorization
+    :members:
+    :undoc-members:
+    :show-inheritance:

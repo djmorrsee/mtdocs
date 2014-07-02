@@ -1,0 +1,7 @@
+bin.util.test_authorization module
+==================================
+
+.. automodule:: bin.util.test_authorization
+    :members:
+    :undoc-members:
+    :show-inheritance:

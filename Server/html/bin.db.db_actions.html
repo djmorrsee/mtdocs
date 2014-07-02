@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bin.db.db_actions module &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="up" title="bin.db package" href="bin.db.html" />
+    <link rel="next" title="bin.db.db_schema module" href="bin.db.db_schema.html" />
+    <link rel="prev" title="bin.db package" href="bin.db.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.db.db_schema.html" title="bin.db.db_schema module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bin.db.html" title="bin.db package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.db.html" accesskey="U">bin.db package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-bin.db.db_actions">
+<span id="bin-db-db-actions-module"></span><h1>bin.db.db_actions module<a class="headerlink" href="#module-bin.db.db_actions" title="Permalink to this headline">¶</a></h1>
+<p>This file contains code for interacting with our database. The actions are
+abstracted into a DBActor class. The DBActor should be the only way the db
+is interacted with after creation.</p>
+<p>Database creation may eventually be done inside of the DBActor init method
+in order to fully abstract away user interaction with a database.</p>
+<p>Status Codes will eventually be abstracted into a SC class for better readability.</p>
+<dl class="class">
+<dt id="bin.db.db_actions.DBActor">
+<em class="property">class </em><tt class="descclassname">bin.db.db_actions.</tt><tt class="descname">DBActor</tt><big>(</big><em>database</em><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of this class should be used for all database interactions</p>
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.AddReading">
+<tt class="descname">AddReading</tt><big>(</big><em>data</em><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.AddReading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.AddReading" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a module reading to the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>JSON Formatted Dictionary</em>) &#8211; Properly formatted (see the JSON data formats) reading dictionary</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 701 SUCCESS</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 705 FAILURE BAD M_ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 706 FAIURE BAD M_AUTH_ID</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.DropOldData">
+<tt class="descname">DropOldData</tt><big>(</big><em>hours</em><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.DropOldData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.DropOldData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drops data older than hours from the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hours</strong> (<em>float</em>) &#8211; The age in hours for which data should be dumped</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 702 SUCCESS</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.GetAllData">
+<tt class="descname">GetAllData</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.GetAllData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.GetAllData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all module data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; A list of readings for each module in the database</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.GetModuleIDs">
+<tt class="descname">GetModuleIDs</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.GetModuleIDs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.GetModuleIDs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of registered modules</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list &#8211; An array of all registered module ids</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.GetReadingsForModule">
+<tt class="descname">GetReadingsForModule</tt><big>(</big><em>m_id</em>, <em>count=0</em><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.GetReadingsForModule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.GetReadingsForModule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all (or count number of) readings for module m_id</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>m_id</strong> (<em>int</em>) &#8211; The ID of the module to query</li>
+<li><strong>count</strong> (<em>int</em>) &#8211; The Number of readings to find. Default of 0 means all</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list &#8211; A list of readings or None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.RegisterID">
+<tt class="descname">RegisterID</tt><big>(</big><em>m_id</em><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.RegisterID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.RegisterID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a module with the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m_id</strong> (<em>int</em>) &#8211; The ID of the module to query</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; A Unique (to m_id) hash id meant for pcDuino consumption</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 705 FAILURE BAD M_ID</td>
+</tr>
+</tbody>
+</table>
+<p>The Unique ID is required for module with m_id to add readings after registration.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.RemoveID">
+<tt class="descname">RemoveID</tt><big>(</big><em>m_id</em><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.RemoveID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.RemoveID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a Module and all its data from the database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m_id</strong> (<em>int</em>) &#8211; The ID of the module to query</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 701 SUCCESS</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 705 FAILURE BAD M_ID</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bin.db.db_actions.DBActor.ResetTable">
+<tt class="descname">ResetTable</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/bin/db/db_actions.html#DBActor.ResetTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.db.db_actions.DBActor.ResetTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the datbase</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int &#8211; Status Code 701 SUCCESS</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bin.db.html"
+                        title="previous chapter">bin.db package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bin.db.db_schema.html"
+                        title="next chapter">bin.db.db_schema module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/bin.db.db_actions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.db.db_schema.html" title="bin.db.db_schema module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bin.db.html" title="bin.db package"
+             >previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.db.html" >bin.db package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

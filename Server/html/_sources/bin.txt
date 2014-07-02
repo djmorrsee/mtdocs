@@ -1,0 +1,19 @@
+bin package
+===========
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bin.data
+    bin.db
+    bin.util
+
+Module contents
+---------------
+
+.. automodule:: bin
+    :members:
+    :undoc-members:
+    :show-inheritance:

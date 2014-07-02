@@ -1,0 +1,7 @@
+bin.data.conversions module
+===========================
+
+.. automodule:: bin.data.conversions
+    :members:
+    :undoc-members:
+    :show-inheritance:

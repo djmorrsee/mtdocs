@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bin.db.db_actions &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">.  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for bin.db.db_actions</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">This file contains code for interacting with our database. The actions are</span>
+<span class="sd">abstracted into a DBActor class. The DBActor should be the only way the db</span>
+<span class="sd">is interacted with after creation.</span>
+
+<span class="sd">Database creation may eventually be done inside of the DBActor init method</span>
+<span class="sd">in order to fully abstract away user interaction with a database.</span>
+
+<span class="sd">Status Codes will eventually be abstracted into a SC class for better readability.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">calendar</span>
+<span class="kn">from</span> <span class="nn">bin.db.db_schema</span> <span class="kn">import</span> <span class="n">ModuleReading</span>
+<span class="kn">from</span> <span class="nn">bin.util.authorization</span> <span class="kn">import</span> <span class="n">HashModuleID</span>
+<span class="kn">from</span> <span class="nn">bin.data.data</span> <span class="kn">import</span> <span class="n">ReadingsToHistoryJSON</span>
+<span class="kn">from</span> <span class="nn">bin.data.conversions</span> <span class="kn">import</span> <span class="n">MakeTimeStamp</span>
+
+<div class="viewcode-block" id="DBActor"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor">[docs]</a><span class="k">class</span> <span class="nc">DBActor</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">  An instance of this class should be used for all database interactions</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">database</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">module_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetModuleIDs</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DBActor.ResetTable"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.ResetTable">[docs]</a>  <span class="k">def</span> <span class="nf">ResetTable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Resets the datbase</span>
+
+<span class="sd">    :returns: int -- Status Code 701 SUCCESS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">drop_all</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">701</span>
+</div>
+<div class="viewcode-block" id="DBActor.RegisterID"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.RegisterID">[docs]</a>  <span class="k">def</span> <span class="nf">RegisterID</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Registers a module with the database</span>
+
+<span class="sd">    :param m_id: The ID of the module to query</span>
+<span class="sd">    :type m_id: int</span>
+
+<span class="sd">    :returns: int -- A Unique (to m_id) hash id meant for pcDuino consumption</span>
+<span class="sd">    :returns: int -- Status Code 705 FAILURE BAD M_ID</span>
+
+<span class="sd">    The Unique ID is required for module with m_id to add readings after registration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">m_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_ids</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">705</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">module_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HashModuleID</span><span class="p">(</span><span class="n">m_id</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="DBActor.RemoveID"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.RemoveID">[docs]</a>  <span class="k">def</span> <span class="nf">RemoveID</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Removes a Module and all its data from the database</span>
+
+<span class="sd">    :param m_id: The ID of the module to query</span>
+<span class="sd">    :type m_id: int</span>
+
+<span class="sd">    :returns: int -- Status Code 701 SUCCESS</span>
+<span class="sd">    :returns: int -- Status Code 705 FAILURE BAD M_ID</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">m_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_ids</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">705</span>
+
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetReadingsForModule</span><span class="p">(</span><span class="n">m_id</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">module_ids</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">m_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">701</span>
+</div>
+<div class="viewcode-block" id="DBActor.AddReading"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.AddReading">[docs]</a>  <span class="k">def</span> <span class="nf">AddReading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Adds a module reading to the database</span>
+
+<span class="sd">    :param data: Properly formatted (see the JSON data formats) reading dictionary</span>
+<span class="sd">    :type data: JSON Formatted Dictionary</span>
+
+<span class="sd">    :returns: int -- Status Code 701 SUCCESS</span>
+<span class="sd">    :returns: int -- Status Code 705 FAILURE BAD M_ID</span>
+<span class="sd">    :returns: int -- Status Code 706 FAIURE BAD M_AUTH_ID</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&quot;module_id&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">m_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_ids</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">705</span>
+
+    <span class="n">module_auth_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&quot;module_auth_id&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">module_auth_id</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">(</span><span class="n">HashModuleID</span><span class="p">(</span><span class="n">m_id</span><span class="p">)):</span>
+      <span class="k">return</span> <span class="mi">706</span>
+
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&quot;reading&quot;</span><span class="p">][</span><span class="s">&quot;temperature&quot;</span><span class="p">]</span>
+    <span class="n">light</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&quot;reading&quot;</span><span class="p">][</span><span class="s">&quot;light&quot;</span><span class="p">]</span>
+
+    <span class="n">reading</span> <span class="o">=</span> <span class="n">ModuleReading</span><span class="p">(</span><span class="n">light</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">m_id</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">reading</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">701</span>
+</div>
+<div class="viewcode-block" id="DBActor.DropOldData"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.DropOldData">[docs]</a>  <span class="k">def</span> <span class="nf">DropOldData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Drops data older than hours from the database</span>
+
+<span class="sd">    :param hours: The age in hours for which data should be dumped</span>
+<span class="sd">    :type hours: float</span>
+
+<span class="sd">    :returns: int -- Status Code 702 SUCCESS</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">time_stamp</span> <span class="o">=</span> <span class="n">MakeTimeStamp</span><span class="p">()</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">hours</span><span class="p">)</span>
+
+    <span class="n">old_time_stamp</span> <span class="o">=</span> <span class="n">time_stamp</span> <span class="o">-</span> <span class="n">age</span>
+    <span class="n">old_readings</span> <span class="o">=</span> <span class="n">ModuleReading</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ModuleReading</span><span class="o">.</span><span class="n">time_stamp</span> <span class="o">&lt;</span> <span class="n">old_time_stamp</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">old_readings</span><span class="p">:</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">702</span>
+</div>
+<div class="viewcode-block" id="DBActor.GetModuleIDs"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.GetModuleIDs">[docs]</a>  <span class="k">def</span> <span class="nf">GetModuleIDs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get a list of registered modules</span>
+
+<span class="sd">    :returns: list -- An array of all registered module ids</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">ModuleReading</span><span class="o">.</span><span class="n">m_id</span><span class="o">.</span><span class="n">distinct</span><span class="p">())</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ids</span>
+</div>
+<div class="viewcode-block" id="DBActor.GetReadingsForModule"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.GetReadingsForModule">[docs]</a>  <span class="k">def</span> <span class="nf">GetReadingsForModule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_id</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get a list of all (or count number of) readings for module m_id</span>
+
+<span class="sd">    :param m_id: The ID of the module to query</span>
+<span class="sd">    :type m_id: int</span>
+
+<span class="sd">    :param count: The Number of readings to find. Default of 0 means all</span>
+<span class="sd">    :type count: int</span>
+
+<span class="sd">    :returns: list -- A list of readings or None</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">m_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_ids</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="n">rs</span> <span class="o">=</span> <span class="n">ModuleReading</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ModuleReading</span><span class="o">.</span><span class="n">m_id</span><span class="o">==</span><span class="n">m_id</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">ModuleReading</span><span class="o">.</span><span class="n">time_stamp</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">rs</span><span class="p">[:</span><span class="n">count</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">rs</span>
+</div>
+<div class="viewcode-block" id="DBActor.GetAllData"><a class="viewcode-back" href="../../../bin.db.db_actions.html#bin.db.db_actions.DBActor.GetAllData">[docs]</a>  <span class="k">def</span> <span class="nf">GetAllData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get a list of all module data</span>
+
+<span class="sd">    :returns: list -- A list of readings for each module in the database</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">modules</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetModuleIDs</span><span class="p">():</span>
+      <span class="n">readings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetReadingsForModule</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReadingsToHistoryJSON</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">readings</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">modules</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">.  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

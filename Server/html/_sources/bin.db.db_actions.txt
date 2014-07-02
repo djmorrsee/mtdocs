@@ -1,0 +1,7 @@
+bin.db.db_actions module
+========================
+
+.. automodule:: bin.db.db_actions
+    :members:
+    :undoc-members:
+    :show-inheritance:

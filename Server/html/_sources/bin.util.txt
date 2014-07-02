@@ -1,0 +1,20 @@
+bin.util package
+================
+
+Submodules
+----------
+
+.. toctree::
+
+   bin.util.authorization
+   bin.util.status_codes
+   bin.util.test_authorization
+   bin.util.test_status_codes
+
+Module contents
+---------------
+
+.. automodule:: bin.util
+    :members:
+    :undoc-members:
+    :show-inheritance:

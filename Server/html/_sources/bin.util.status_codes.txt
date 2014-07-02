@@ -1,0 +1,7 @@
+bin.util.status_codes module
+============================
+
+.. automodule:: bin.util.status_codes
+    :members:
+    :undoc-members:
+    :show-inheritance:
