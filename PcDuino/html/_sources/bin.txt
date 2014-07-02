@@ -1,0 +1,20 @@
+bin package
+===========
+
+Subpackages
+-----------
+
+.. toctree::
+
+    bin.network
+    bin.pcduino
+    bin.test
+    bin.util
+
+Module contents
+---------------
+
+.. automodule:: bin
+    :members:
+    :undoc-members:
+    :show-inheritance:

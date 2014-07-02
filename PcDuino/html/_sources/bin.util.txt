@@ -1,0 +1,20 @@
+bin.util package
+================
+
+Submodules
+----------
+
+.. toctree::
+
+   bin.util.authorization
+   bin.util.calibration
+   bin.util.constants
+   bin.util.crono
+
+Module contents
+---------------
+
+.. automodule:: bin.util
+    :members:
+    :undoc-members:
+    :show-inheritance:

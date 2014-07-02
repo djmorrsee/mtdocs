@@ -1,0 +1,7 @@
+get_readings module
+===================
+
+.. automodule:: get_readings
+    :members:
+    :undoc-members:
+    :show-inheritance:

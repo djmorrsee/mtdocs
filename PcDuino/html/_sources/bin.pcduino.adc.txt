@@ -1,0 +1,7 @@
+bin.pcduino.adc module
+======================
+
+.. automodule:: bin.pcduino.adc
+    :members:
+    :undoc-members:
+    :show-inheritance:

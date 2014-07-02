@@ -1,0 +1,7 @@
+register_module module
+======================
+
+.. automodule:: register_module
+    :members:
+    :undoc-members:
+    :show-inheritance:

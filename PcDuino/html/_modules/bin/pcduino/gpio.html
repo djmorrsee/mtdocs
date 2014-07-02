@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bin.pcduino.gpio &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">.  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for bin.pcduino.gpio</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">pinmap</span> <span class="kn">import</span> <span class="n">PinMap</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;HIGH&#39;</span><span class="p">,</span> <span class="s">&#39;LOW&#39;</span><span class="p">,</span> <span class="s">&#39;INPUT&#39;</span><span class="p">,</span> <span class="s">&#39;OUTPUT&#39;</span><span class="p">,</span><span class="s">&#39;digital_write&#39;</span><span class="p">,</span> <span class="s">&#39;digital_read&#39;</span><span class="p">,</span> <span class="s">&quot;pin_mode&quot;</span><span class="p">]</span>
+
+<span class="n">HIGH</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">LOW</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">INPUT</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">OUTPUT</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">gpio_pins</span> <span class="o">=</span> <span class="n">PinMap</span><span class="p">(</span><span class="s">&#39;/sys/devices/virtual/misc/gpio/pin&#39;</span><span class="p">,</span> <span class="s">&#39;gpio&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="n">gpio_mode_pins</span> <span class="o">=</span> <span class="n">PinMap</span><span class="p">(</span><span class="s">&#39;/sys/devices/virtual/misc/gpio/mode/&#39;</span><span class="p">,</span> <span class="s">&#39;gpio&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<div class="viewcode-block" id="digital_write"><a class="viewcode-back" href="../../../bin.pcduino.gpio.html#bin.pcduino.gpio.digital_write">[docs]</a><span class="k">def</span> <span class="nf">digital_write</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Write to a GPIO channel&quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">gpio_pins</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;1&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">HIGH</span> <span class="k">else</span> <span class="s">&#39;0&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="digital_read"><a class="viewcode-back" href="../../../bin.pcduino.gpio.html#bin.pcduino.gpio.digital_read">[docs]</a><span class="k">def</span> <span class="nf">digital_read</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Read from a GPIO channel&quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">gpio_pins</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;1&#39;</span>
+</div>
+<div class="viewcode-block" id="pin_mode"><a class="viewcode-back" href="../../../bin.pcduino.gpio.html#bin.pcduino.gpio.pin_mode">[docs]</a><span class="k">def</span> <span class="nf">pin_mode</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Set Mode of a GPIO channel &quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">gpio_mode_pins</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;0&#39;</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">INPUT</span> <span class="k">else</span> <span class="s">&#39;1&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">.  documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

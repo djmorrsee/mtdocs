@@ -1,0 +1,19 @@
+bin.pcduino package
+===================
+
+Submodules
+----------
+
+.. toctree::
+
+   bin.pcduino.adc
+   bin.pcduino.gpio
+   bin.pcduino.pinmap
+
+Module contents
+---------------
+
+.. automodule:: bin.pcduino
+    :members:
+    :undoc-members:
+    :show-inheritance:

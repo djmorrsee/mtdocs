@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bin.network.server_comm module &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="up" title="bin.network package" href="bin.network.html" />
+    <link rel="next" title="bin.pcduino package" href="bin.pcduino.html" />
+    <link rel="prev" title="bin.network package" href="bin.network.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.pcduino.html" title="bin.pcduino package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bin.network.html" title="bin.network package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.network.html" accesskey="U">bin.network package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-bin.network.server_comm">
+<span id="bin-network-server-comm-module"></span><h1>bin.network.server_comm module<a class="headerlink" href="#module-bin.network.server_comm" title="Permalink to this headline">¶</a></h1>
+<p>This file contains wrapper functions for api requests</p>
+<dl class="function">
+<dt id="bin.network.server_comm.DeleteJSONToServer">
+<tt class="descclassname">bin.network.server_comm.</tt><tt class="descname">DeleteJSONToServer</tt><big>(</big><em>json_data</em>, <em>url</em><big>)</big><a class="reference internal" href="_modules/bin/network/server_comm.html#DeleteJSONToServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.network.server_comm.DeleteJSONToServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>DELETE request
+Should be used for posting sensor reading data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>json_data</strong> (<em>JSON</em>) &#8211; data to be sent</li>
+<li><strong>url</strong> (<em>string</em>) &#8211; the url for desired api call</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.network.server_comm.FormReadingJSON">
+<tt class="descclassname">bin.network.server_comm.</tt><tt class="descname">FormReadingJSON</tt><big>(</big><em>m_id</em>, <em>m_auth_id</em>, <em>temp</em>, <em>light</em><big>)</big><a class="reference internal" href="_modules/bin/network/server_comm.html#FormReadingJSON"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.network.server_comm.FormReadingJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for turning data into JSON format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>m_id</strong> (<em>int</em>) &#8211; the modules id</li>
+<li><strong>m_auth_id</strong> (<em>int</em>) &#8211; the module&#8217;s API auotharazation key</li>
+<li><strong>temp</strong> (<em>int</em>) &#8211; the temperature pin readins</li>
+<li><strong>light</strong> (<em>int</em>) &#8211; the light pin reading</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.network.server_comm.FormRegistrationJSON">
+<tt class="descclassname">bin.network.server_comm.</tt><tt class="descname">FormRegistrationJSON</tt><big>(</big><em>auth_id</em><big>)</big><a class="reference internal" href="_modules/bin/network/server_comm.html#FormRegistrationJSON"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.network.server_comm.FormRegistrationJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>For delete request only</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>m_auth_id</strong> (<em>int</em>) &#8211; the module&#8217;s API auotharazation key</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.network.server_comm.GetDataFromServer">
+<tt class="descclassname">bin.network.server_comm.</tt><tt class="descname">GetDataFromServer</tt><big>(</big><em>url</em><big>)</big><a class="reference internal" href="_modules/bin/network/server_comm.html#GetDataFromServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.network.server_comm.GetDataFromServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A GET request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>url</strong> (<em>string</em>) &#8211; the url for desired api call</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="bin.network.server_comm.PostJSONToServer">
+<tt class="descclassname">bin.network.server_comm.</tt><tt class="descname">PostJSONToServer</tt><big>(</big><em>json_data</em>, <em>url</em><big>)</big><a class="reference internal" href="_modules/bin/network/server_comm.html#PostJSONToServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bin.network.server_comm.PostJSONToServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>POST request</p>
+<p>Should be used for posting sensor reading data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>json_data</strong> (<em>JSON</em>) &#8211; data to be sent</li>
+<li><strong>url</strong> (<em>string</em>) &#8211; the url for desired api call</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bin.network.html"
+                        title="previous chapter">bin.network package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bin.pcduino.html"
+                        title="next chapter">bin.pcduino package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/bin.network.server_comm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bin.pcduino.html" title="bin.pcduino package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bin.network.html" title="bin.network package"
+             >previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li>
+          <li><a href="bin.html" >bin package</a> &raquo;</li>
+          <li><a href="bin.network.html" >bin.network package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

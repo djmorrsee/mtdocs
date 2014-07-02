@@ -1,0 +1,19 @@
+bin.test package
+================
+
+Submodules
+----------
+
+.. toctree::
+
+   bin.test.test_Networking
+   bin.test.test_SmoothReadng
+   bin.test.test_anolog_read
+
+Module contents
+---------------
+
+.. automodule:: bin.test
+    :members:
+    :undoc-members:
+    :show-inheritance:

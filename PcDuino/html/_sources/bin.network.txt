@@ -1,0 +1,17 @@
+bin.network package
+===================
+
+Submodules
+----------
+
+.. toctree::
+
+   bin.network.server_comm
+
+Module contents
+---------------
+
+.. automodule:: bin.network
+    :members:
+    :undoc-members:
+    :show-inheritance:

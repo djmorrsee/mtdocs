@@ -1,0 +1,7 @@
+bin.util.crono module
+=====================
+
+.. automodule:: bin.util.crono
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,7 @@
+bin.pcduino.pinmap module
+=========================
+
+.. automodule:: bin.pcduino.pinmap
+    :members:
+    :undoc-members:
+    :show-inheritance:

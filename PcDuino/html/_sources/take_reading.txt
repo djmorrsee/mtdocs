@@ -1,0 +1,7 @@
+take_reading module
+===================
+
+.. automodule:: take_reading
+    :members:
+    :undoc-members:
+    :show-inheritance:

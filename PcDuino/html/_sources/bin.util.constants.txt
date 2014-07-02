@@ -1,0 +1,7 @@
+bin.util.constants module
+=========================
+
+.. automodule:: bin.util.constants
+    :members:
+    :undoc-members:
+    :show-inheritance:

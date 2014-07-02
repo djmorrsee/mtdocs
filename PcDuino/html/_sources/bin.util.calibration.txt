@@ -1,0 +1,7 @@
+bin.util.calibration module
+===========================
+
+.. automodule:: bin.util.calibration
+    :members:
+    :undoc-members:
+    :show-inheritance:

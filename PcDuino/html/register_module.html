@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>register_module module &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="next" title="take_reading module" href="take_reading.html" />
+    <link rel="prev" title="get_readings module" href="get_readings.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="take_reading.html" title="take_reading module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="get_readings.html" title="get_readings module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-register_module">
+<span id="register-module-module"></span><h1>register_module module<a class="headerlink" href="#module-register_module" title="Permalink to this headline">¶</a></h1>
+<p>This file contains functions for registering the pcduino and for removing 
+it from the server.</p>
+<p>This should only be done once</p>
+<dl class="function">
+<dt id="register_module.Register">
+<tt class="descclassname">register_module.</tt><tt class="descname">Register</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/register_module.html#Register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#register_module.Register" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function lets the server know that there is a new module
+if the MOLUDULE_ID in constants.py is unique the server will return an
+authoraztion key that will be needed for any later api requests made by the 
+pcduino. This key will be saved in a text file by this function. If the MODULE_ID 
+is already in use the bad reqistraion staus code wil be printed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="register_module.UnRegister">
+<tt class="descclassname">register_module.</tt><tt class="descname">UnRegister</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/register_module.html#UnRegister"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#register_module.UnRegister" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an API requests to the server to remove all of data for this module 
+from the database.</p>
+<p>This should only be called if the module will be disconnected.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="get_readings.html"
+                        title="previous chapter">get_readings module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="take_reading.html"
+                        title="next chapter">take_reading module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/register_module.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="take_reading.html" title="take_reading module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="get_readings.html" title="get_readings module"
+             >previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

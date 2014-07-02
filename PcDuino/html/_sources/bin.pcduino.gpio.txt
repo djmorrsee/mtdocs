@@ -1,0 +1,7 @@
+bin.pcduino.gpio module
+=======================
+
+.. automodule:: bin.pcduino.gpio
+    :members:
+    :undoc-members:
+    :show-inheritance:
